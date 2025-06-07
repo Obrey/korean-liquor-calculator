@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
     document.getElementById('startDate').value = `${year}-${month}-${day}`;
+    
+    // 날짜 입력 필드에 한국어 형식 힌트 추가
+    const dateInput = document.getElementById('startDate');
+    dateInput.setAttribute('lang', 'ko-KR');
 });
 
 function updateLiquorName() {

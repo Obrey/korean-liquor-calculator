@@ -10,7 +10,7 @@
     <div class="container">
         <div class="header">
             <h1>🍶 전통주 제조 계산기</h1>
-            <p>단양주부터 시작하는 전통주 제작 라이프! 전통주를 쉽고 간단히 계산해보자</p>
+            <p>단양주부터 오양주까지 정확한 재료 계산과 일정 관리</p>
         </div>
         
         <div class="content">
@@ -61,10 +61,8 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="startDate">술 빚기 시작일 (년/월/일)</label>
-                    <input type="text" id="startDate" placeholder="2025/06/08" 
-                           pattern="\d{4}/\d{2}/\d{2}" 
-                           title="년/월/일 형식으로 입력해주세요 (예: 2025/06/08)">
+                    <label for="startDate">술 빚기 시작일</label>
+                    <input type="date" id="startDate">
                 </div>
 
                 <button class="calculate-btn" onclick="calculateIngredients()">

@@ -4,41 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
-    document.getElementById('startDate').value = `${year}/${month}/${day}`;
-    
-    // 날짜 입력 필드에 자동 슬래시 추가 기능
-    const dateInput = document.getElementById('startDate');
-    dateInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, ''); // 숫자만 남기기
-        if (value.length >= 4) {
-            value = value.substring(0, 4) + '/' + value.substring(4);
-        }
-        if (value.length >= 7) {
-            value = value.substring(0, 7) + '/' + value.substring(7);
-        }
-        if (value.length > 10) {
-            value = value.substring(0, 10);
-        }
-        e.target.value = value;
-    });
+    document.getElementById('startDate').value = `${year}-${month}-${day}`;
 });
-
-// 날짜 형식 검증 및 변환 함수
-function parseKoreanDate(dateString) {
-    const parts = dateString.split('/');
-    if (parts.length !== 3) return null;
-    
-    const year = parseInt(parts[0]);
-    const month = parseInt(parts[1]);
-    const day = parseInt(parts[2]);
-    
-    if (year < 1900 || year > 2100 || month < 1 || month > 12 || day < 1 || day > 31) {
-        return null;
-    }
-    
-    // ISO 형식으로 변환 (YYYY-MM-DD)
-    return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-}
 
 function updateLiquorName() {
     const customSteps = document.getElementById('customSteps');
@@ -87,7 +54,7 @@ function calculateIngredients() {
     const liquorSteps = getLiquorSteps();
     const totalAmount = parseFloat(document.getElementById('totalAmount').value);
     const porridgeType = document.getElementById('porridgeType').value;
-    const startDateInput = document.getElementById('startDate').value;
+    const startDate = document.getElementById('startDate').value;
     
     if (!liquorSteps || liquorSteps <= 0) {
         alert('올바른 술 종류를 선택하거나 덧술 횟수를 입력해주세요.');
@@ -99,15 +66,8 @@ function calculateIngredients() {
         return;
     }
     
-    if (!startDateInput) {
-        alert('술 빚기 시작일을 입력해주세요.');
-        return;
-    }
-    
-    // 한국식 날짜를 ISO 형식으로 변환
-    const startDate = parseKoreanDate(startDateInput);
     if (!startDate) {
-        alert('올바른 날짜 형식을 입력해주세요. (예: 2025/06/08)');
+        alert('술 빚기 시작일을 선택해주세요.');
         return;
     }
 

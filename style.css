@@ -74,12 +74,6 @@ input:focus, select:focus {
     border-color: #3498db;
 }
 
-/* 날짜 입력 필드 스타일링 */
-input[type="text"]#startDate {
-    font-family: monospace;
-    letter-spacing: 1px;
-}
-
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));

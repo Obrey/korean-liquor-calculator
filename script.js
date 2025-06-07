@@ -1,14 +1,14 @@
 // 페이지 로드 시 오늘 날짜를 기본값으로 설정 (한국 날짜 형식)
 document.addEventListener('DOMContentLoaded', function() {
+    const startDateInput = document.getElementById('startDate');
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
-    document.getElementById('startDate').value = `${year}-${month}-${day}`;
+    const formattedDate = `${year}-${month}-${day}`;
     
-    // 날짜 입력 필드에 한국어 형식 힌트 추가
-    const dateInput = document.getElementById('startDate');
-    dateInput.setAttribute('lang', 'ko-KR');
+    startDateInput.value = formattedDate;
+    console.log('startDate 설정값:', startDateInput.value); // 디버깅용
 });
 
 function updateLiquorName() {
@@ -57,9 +57,18 @@ function getLiquorName(steps) {
 function calculateIngredients() {
     const liquorSteps = getLiquorSteps();
     const totalAmount = parseFloat(document.getElementById('totalAmount').value);
+    let startDate = document.getElementById('startDate').value;
     const porridgeType = document.getElementById('porridgeType').value;
-    const startDate = document.getElementById('startDate').value;
-    
+
+    // 슬래시를 하이픈으로 변환
+    startDate = startDate.replace(/\//g, '-');
+
+    // 날짜 형식이 유효한지 검증
+    if (!startDate || !/^\d{4}-\d{2}-\d{2}$/.test(startDate)) {
+        alert('올바른 날짜 형식을 선택해주세요 (yyyy-MM-dd).');
+        return;
+    }
+
     if (!liquorSteps || liquorSteps <= 0) {
         alert('올바른 술 종류를 선택하거나 덧술 횟수를 입력해주세요.');
         return;
@@ -67,11 +76,6 @@ function calculateIngredients() {
     
     if (!totalAmount || totalAmount <= 0) {
         alert('올바른 술 양을 입력해주세요.');
-        return;
-    }
-    
-    if (!startDate) {
-        alert('술 빚기 시작일을 선택해주세요.');
         return;
     }
 
@@ -108,7 +112,7 @@ function calculateIngredients() {
             note: '발효 완료 후 맑은 술 걸러내기'
         });
     } else {
-        // 다양주 계산 - 올바른 방식
+        // 다양주 계산
         const steps = liquorSteps;
         const waterRatio = porridgeType === 'porridge' ? 5 : 3; // 죽(물:쌀가루=5:1) 또는 범벅(물:쌀가루=3:1)
         const stepInterval = 4; // 4일 간격
@@ -188,7 +192,15 @@ function calculateIngredients() {
 }
 
 function addDays(dateString, days) {
+    // 슬래시를 하이픈으로 변환
+    dateString = dateString.replace(/\//g, '-');
     const date = new Date(dateString);
+
+    // 유효한 날짜인지 확인
+    if (isNaN(date.getTime())) {
+        throw new Error(`Invalid date format: ${dateString}. Expected yyyy-MM-dd.`);
+    }
+
     date.setDate(date.getDate() + days);
     return date.toISOString().split('T')[0];
 }

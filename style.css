@@ -60,38 +60,6 @@ label {
     color: #2c3e50;
 }
 
-input[type="date"] {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #e1e5e9;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border-color 0.3s;
-    /* 한국어 날짜 형식으로 표시 */
-    direction: ltr;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-}
-
-/* 날짜 입력 필드를 한국어 형식으로 보이게 하기 */
-input[type="date"]::-webkit-datetime-edit {
-    display: flex;
-}
-
-input[type="date"]::-webkit-datetime-edit-year-field {
-    order: 1;
-}
-
-input[type="date"]::-webkit-datetime-edit-month-field {
-    order: 2;
-}
-
-input[type="date"]::-webkit-datetime-edit-day-field {
-    order: 3;
-}
-
 input, select {
     width: 100%;
     padding: 12px;

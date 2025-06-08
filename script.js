@@ -115,7 +115,7 @@ function calculateIngredients() {
         // 다양주 계산
         const steps = liquorSteps;
         const waterRatio = porridgeType === 'porridge' ? 5 : 3; // 죽(물:쌀가루=5:1) 또는 범벅(물:쌀가루=3:1)
-        const stepInterval = 4; // 4일 간격
+        const stepInterval = 2; // 2일 간격으로 수정
         
         // 마지막 단계는 고두밥(물 없음)이므로, 이전 단계들에서 모든 물을 사용
         const waterSteps = steps - 1; // 물을 넣는 단계 수
@@ -169,7 +169,7 @@ function calculateIngredients() {
                     processing: processingMethod,
                     note: i === 0 ? 
                         '누룩은 첫 번째에만, 21-25도 유지' : 
-                        '차게 식힌 후 투입'
+                        '차게 식힌 후 투입 (48시간 간격)'
                 });
             }
         }
@@ -250,7 +250,7 @@ function displayResults(schedule, totalAmount, liquorSteps, totalRice, totalWate
         </div>
 
         <div class="schedule-section">
-            <h4>📅 제조 일정표</h4>
+            <h4>📅 제조 일정표 (48시간 간격)</h4>
             <table class="schedule-table">
                 <thead>
                     <tr>
@@ -315,6 +315,7 @@ function displayResults(schedule, totalAmount, liquorSteps, totalRice, totalWate
         <div class="tips-section">
             <h4>💡 제조 팁</h4>
             <ul class="tips-list">
+                <li>덧술은 48시간(2일) 간격으로 진행합니다</li>
                 <li>범벅/죽을 만들 때는 빠르고 신속하게 익혀야 합니다</li>
                 <li>발효 온도는 21-25도를 유지해주세요</li>
                 <li>덧술 타이밍을 놓치면 효모 활동이 약해질 수 있으니 주의하세요</li>

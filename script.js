@@ -1,4 +1,3 @@
-// 페이지 로드 시 오늘 날짜를 기본값으로 설정 (한국 날짜 형식)
 document.addEventListener('DOMContentLoaded', function() {
     const startDateInput = document.getElementById('startDate');
     const today = new Date();
@@ -100,7 +99,7 @@ function calculateIngredients() {
         });
         
         // 채주일 추가
-        const filterDate = addDays(startDate, 14);
+        const filterDate = addDays(startDate, 21); // 3주로 변경
         schedule.push({
             step: 2,
             stepName: '채주 (걸러내기)',
@@ -115,7 +114,7 @@ function calculateIngredients() {
         // 다양주 계산
         const steps = liquorSteps;
         const waterRatio = porridgeType === 'porridge' ? 5 : 3; // 죽(물:쌀가루=5:1) 또는 범벅(물:쌀가루=3:1)
-        const stepInterval = 2; // 2일 간격으로 수정
+        const stepInterval = 2; // 2일 간격
         
         // 마지막 단계는 고두밥(물 없음)이므로, 이전 단계들에서 모든 물을 사용
         const waterSteps = steps - 1; // 물을 넣는 단계 수
@@ -174,8 +173,8 @@ function calculateIngredients() {
             }
         }
         
-        // 채주일 추가 (마지막 덧술 후 2-3주)
-        const filterDate = addDays(startDate, (steps - 1) * stepInterval + 18);
+        // 채주일 추가 (마지막 덧술 후 3주)
+        const filterDate = addDays(startDate, (steps - 1) * stepInterval + 21); // 3주로 변경
         schedule.push({
             step: steps + 1,
             stepName: '채주 (걸러내기)',
